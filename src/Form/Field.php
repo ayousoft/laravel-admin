@@ -398,6 +398,15 @@ class Field implements Renderable
         }
 
         $this->value = Arr::get($data, $this->column);
+
+        $this->formatValue();
+    }
+
+    /**
+     * Format value by passing custom formater.
+     */
+    protected function formatValue()
+    {
         if (isset($this->customFormat) && $this->customFormat instanceof \Closure) {
             $this->value = call_user_func($this->customFormat, $this->value);
         }
@@ -714,6 +723,11 @@ class Field implements Renderable
      */
     protected function removeRule($rule)
     {
+        if (is_array($this->rules)) {
+            array_delete($this->rules, $rule);
+            return;
+        }
+
         if (!is_string($this->rules)) {
             return;
         }

@@ -576,14 +576,16 @@ class Grid
             return;
         }
 
-        $collection = $this->processFilter(false);
+        $this->applyQuickSearch();
 
-        $data = $collection->toArray();
+        $collection = $this->applyFilter(false);
 
         $this->prependRowSelectorColumn();
         $this->appendActionsColumn();
 
         Column::setOriginalGridModels($collection);
+
+        $data = $collection->toArray();
 
         $this->columns->map(function (Column $column) use (&$data) {
             $data = $column->fill($data);
@@ -888,6 +890,8 @@ class Grid
             'modal'       => Displayers\Modal::class,
             'gravatar'    => Displayers\Gravatar::class,
             'carousel'    => Displayers\Carousel::class,
+            'loading'     => Displayers\Loading::class,
+            'filesize'    => Displayers\FileSize::class,
         ];
 
         foreach ($map as $abstract => $class) {

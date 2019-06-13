@@ -61,7 +61,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @method Field\Html           html($html, $label = '')
  * @method Field\Tags           tags($column, $label = '')
  * @method Field\Icon           icon($column, $label = '')
- * @method Field\Embeds         embeds($column, $label = '')
+ * @method Field\Embeds         embeds($column, $label = '', $callback)
  * @method Field\MultipleImage  multipleImage($column, $label = '')
  * @method Field\MultipleFile   multipleFile($column, $label = '')
  * @method Field\Captcha        captcha($column, $label = '')
@@ -1077,7 +1077,7 @@ class Form implements Renderable
     /**
      * Add a fieldset to form.
      *
-     * @param string $title
+     * @param string  $title
      * @param Closure $setCallback
      *
      * @return Field\Fieldset
